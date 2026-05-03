@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | Lumière d'art</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      min-height: 100vh;
+      color: white;
+      background:
+        linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.8)),
+        url("movies-bg.jpg") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+}
+    
+
+    .login-box{
+      width: 380px;
+      padding: 45px 40px;
+      background: rgba(0,0,0,.72);
+      border-radius: 8px;
+    }
+
+    .login-box h1{
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 34px;
+    }
+
+    .login-box input{
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 14px;
+      border: none;
+      border-radius: 5px;
+      background: #333;
+      color: white;
+      font-size: 15px;
+    }
+
+    .login-box input::placeholder{
+      color: #aaa;
+    }
+
+    .login-box button{
+      width: 100%;
+      padding: 15px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 5px;
+      background: #e50914;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .options{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    .options a,
+    .signup a{
+      color: #fff;
+      text-decoration: none;
+      margin-top: 14px;
+    }
+
+    .signup{
+      margin-top: 35px;
+      color: #bbb;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .signup a{
+      display: inline-block;
+      margin-top: 10px;
+      color: #e50914;
+      font-weight: bold;
+    }
+    .remember{
+  display: flex;
+  align-items: center;
+  gap: 10px; /* مسافة بينهم */
+  margin-top: 40px;
+}
+
+.remember input{
+  width: auto; /* عشان ما يتمدد */
+} 
+body{
+  min-height: 100vh;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
+    url("background.jpg") center/cover no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button:hover{
+  background: #c40812;
+  transform: scale(1.03);
+  transition: 0.3s;
+}
+input:focus{
+  outline: none;
+  border: 1px solid #e50914;
+}
+body{
+  backdrop-filter: blur(3px);
+}
+.login-box{
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Sign In</h1>
+
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email or phone number" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+
+      <button type="submit">Sign In</button>
+
+      <div class="remember">
+        <label>
+          <input type="checkbox">
+          Remember me
+        </label>
+      </div>
+
+      <p id="loginMsg"></p>
+
+      <div class="signup">
+        <p>New to Lumière Cinema?</p>
+        <a href="signup.html">Sign up now</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

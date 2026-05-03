@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style-index.css">
+  
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>Lumière Cinema | Home</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  
+</head>
+<body>
+
+   <header>
+        <div class="navbar">
+            <h1 class="logo">
+                <i class="bi bi-film"></i> Lumière d'art</h1>
+
+            <nav>
+              
+                <a href="index.html"class="active">Home </a>
+                <a href="lumiere-movies.html">Movies</a>
+                <a href="About-us.html">About Us</a>
+                <a href="contact-us.html">Contact Us</a>
+                <a href="login.html" class="login-btn">Log in</a>
+            </nav>
+        </div>
+    </header>
+
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-text">
+        <h2>Where Every <span>Movie Night</span> Feels Legendary</h2>
+        <p>
+          Welcome to Lumière Cinema, a modern cinema website designed for movie lovers.
+          Our platform helps users discover the latest films, explore exclusive offers,
+          and enjoy a premium cinematic experience in one elegant place.
+        </p>
+
+        <div class="hero-buttons">
+       <a href="#" class="btn-secondary" id="exploreBtn">Explore Movies</a>
+          
+        </div>
+      </div>
+
+      <div class="poster-box">
+        <div class="poster-overlay">
+          <span class="poster-tag">Premium Cinema Experience</span>
+          <h3>Lumière Cinema</h3>
+          <p>
+            A luxury-inspired platform that combines entertainment, style,
+            and a smooth digital movie journey.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="intro-card">
+      <h3>About Our Website</h3>
+      <p>
+        Lumière Cinema is a stylish website built to introduce users to the world of cinema.
+        It provides a clear and attractive interface where visitors can browse movies,
+        view offers, and navigate through the website easily.
+      </p>
+    </div>
+
+    <div class="intro-card">
+      <h3>Our Idea</h3>
+      <p>
+        The main idea of this project is to create a cinema website with a luxurious look
+        and user-friendly design. It reflects the excitement of watching movies and makes
+        the online cinema experience more engaging, elegant, and enjoyable.
+      </p>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <h2 class="section-title">Why Choose Lumière Cinema?</h2>
+    <p class="section-subtitle">
+      We combine elegant design with cinema passion to create an experience that feels modern,
+      immersive, and visually memorable.
+    </p>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🍿</div>
+        <h3>Latest Movies</h3>
+        <p>
+          Browse exciting new releases and stay updated with the hottest titles in cinema.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎟️</div>
+        <h4>Exclusive Offers</h4>
+        <p>
+          Discover attractive promotions and enjoy a premium movie experience at better value.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <h4>Luxury Design</h4>
+        <p>
+          Enjoy a rich visual interface inspired by modern cinema aesthetics and elegance.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="movies-preview">
+    <h2 class="section-title" style="text-align: center;">Now Showing</h2>
+    <p class="section-subtitle" style="text-align: center;">
+      A quick preview of featured movies on our website.
+    </p>
+
+    <div class="movie-grid">
+      <div class="movie-card">
+        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=80" alt="Movie 1">
+        <div class="movie-info">
+          <h3>Midnight Vision</h3>
+          <p>Action | Adventure | 2h 10m</p>
+        </div>
+      </div>
+
+      <div class="movie-card">
+        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80" alt="Movie 2">
+        <div class="movie-info">
+          <h4>Golden Frame</h4>
+          <p>Drama | Mystery | 1h 52m</p>
+        </div>
+      </div>
+
+      <div class="movie-card">
+        <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=900&q=80" alt="Movie 3">
+        <div class="movie-info">
+          <h5>Crimson Night</h5>
+          <p>Thriller | Crime | 2h 05m</p>
+        </div>
+      </div>
+
+      <div class="movie-card">
+        <img src="https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=900&q=80" alt="Movie 4">
+        <div class="movie-info">
+          <h5>Silent Spotlight</h5>
+          <p>Romance | Drama | 1h 47m</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h3>Step Into the World of Cinema</h3>
+    <p>
+      Explore movies, discover offers, and enjoy a beautifully crafted digital cinema platform
+      designed with passion and elegance.
+    </p>
+    <a href="lumiere-movies.html" class="btn-secondary" style="background: rgba(255,255,255,0.18); ">Start Exploring </a>
+  </section>
+
+  <footer>
+    <p>© 2026 Lumière d'art Cinema. All Rights Reserved.</p>
+    <p>Designed for Web Development Project</p>
+  </footer>
+  <script>
+  document.getElementById("exploreBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn === "true") {
+      window.location.href = "lumiere-movies.html";
+    } else {
+      window.location.href = "login.html";
+    }
+  });
+</script>
+
+</body>
+</html>
