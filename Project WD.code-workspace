@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "Project WD",
+			"path": "."
+		},
+		{
+			"name": "movies",
+			"path": "../movies"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Project WD"
+	}
+}

@@ -1,5 +1,5 @@
 const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
+const mysql = require("mysql");
 const cors = require("cors");
 
 const app = express();
@@ -9,47 +9,83 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(__dirname));
 
-const db = new sqlite3.Database("./users.db");
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "cinema_db"
+});
 
-db.run(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    email TEXT UNIQUE,
-    password TEXT
-  )
-`);
+db.connect((err) => {
+  if (err) {
+    console.log("DB Error:", err);
+  } else {
+    console.log("Connected to MySQL database");
+  }
+});
 
+// SIGN UP
 app.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
 
-  db.run(
-    "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-    [name, email, password],
-    function (err) {
-      if (err) {
-        return res.json({ success: false, message: "Email already exists" });
-      }
+  if (!name || !email || !password) {
+    return res.json({
+      success: false,
+      message: "All fields are required"
+    });
+  }
 
-      res.json({ success: true, user: { name, email } });
+  const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+
+  db.query(sql, [name, email, password], (err, result) => {
+    if (err) {
+      return res.json({
+        success: false,
+        message: "Email already exists"
+      });
     }
-  );
+
+    res.json({
+      success: true,
+      message: "Account created successfully"
+    });
+  });
 });
 
+// LOGIN
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  db.get(
-    "SELECT name, email FROM users WHERE email = ? AND password = ?",
-    [email, password],
-    (err, user) => {
-      if (!user) {
-        return res.json({ success: false, message: "Wrong email or password" });
-      }
+  if (!email || !password) {
+    return res.json({
+      success: false,
+      message: "Email and password are required"
+    });
+  }
 
-      res.json({ success: true, user });
+  const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+
+  db.query(sql, [email, password], (err, result) => {
+    if (err) {
+      return res.json({
+        success: false,
+        message: "Database error"
+      });
     }
-  );
+
+    if (result.length > 0) {
+      res.json({
+        success: true,
+        message: "Login successful",
+        user: result[0]
+      });
+    } else {
+      res.json({
+        success: false,
+        message: "Wrong email or password"
+      });
+    }
+  });
 });
 
 app.listen(PORT, () => {
