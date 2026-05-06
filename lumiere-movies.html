@@ -47,141 +47,29 @@
 
 <h2 class="section-title">Now Showing</h2>
 
-<div class="movies-grid">
-
-<!-- 1 -->
-<div class="movie-card">
-<img src="movies/beautiful-day.jpg" alt="Beautiful Day Movie">
-<div class="movie-info">
-<h3>Beautiful Day</h3>
-<p class="genre">Drama</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>A journalist interviews Mr. Rogers.</p>
-<span>1h 49m</span>
-</div>
+<div class="movies-controls">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search for a movie...">
+    <select id="genreFilter">
+      <option value="">All Genres</option>
+      <option value="Drama">Drama</option>
+      <option value="Comedy">Comedy</option>
+      <option value="Action">Action</option>
+      <option value="Fantasy">Fantasy</option>
+    </select>
+  </div>
 </div>
 
-<!-- 2 -->
-<div class="movie-card">
-<img src="movies/knives-out.jpg" alt="Knives Out Movie">
-<div class="movie-info">
-<h3>Knives Out</h3>
-<p class="genre">Mystery</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>A detective investigates a mystery.</p>
-<span>2h 10m</span>
-</div>
-</div>
+<div id="movies-container" class="movies-grid"> </div>
 
-<!-- 3 -->
-<div class="movie-card">
-<img src="movies/little-women.jpg" alt="Little Women Movie">
-<div class="movie-info">
-<h3>Little Women</h3>
-<p class="genre">Drama</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>The story of four sisters.</p>
-<span>2h 15m</span>
-</div>
-</div>
-
-<!-- 4 -->
-<div class="movie-card">
-<img src="movies/jumanji.jpg" alt="Jumanji Movie">
-<div class="movie-info">
-<h3>Jumanji</h3>
-<p class="genre">Adventure</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>Players trapped in a game.</p>
-<span>2h 3m</span>
-</div>
-</div>
-
-<!-- 5 -->
-<div class="movie-card">
-<img src="movies/1917.jpg" alt="1917 Movie">
-<div class="movie-info">
-<h3>1917</h3>
-<p class="genre">War</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>Two soldiers deliver a message.</p>
-<span>1h 59m</span>
-</div>
-</div>
-
-<!-- 6 -->
-<div class="movie-card">
-<img src="movies/aladdin.jpg" alt="Aladdin Movie">
-<div class="movie-info">
-<h3>Aladdin</h3>
-<p class="genre">Fantasy</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>A magical adventure begins.</p>
-<span>2h 8m</span>
-</div>
-</div>
-
-<!-- 7 -->
-<div class="movie-card">
-<img src="movies/frozen2.jpg" alt="Frozen 2 Movie">
-<div class="movie-info">
-<h3>Frozen II</h3>
-<p class="genre">Animation</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>Elsa discovers her powers.</p>
-<span>1h 43m</span>
-</div>
-</div>
-
-<!-- 8 -->
-<div class="movie-card">
-<img src="movies/yesterday.jpg" alt="Yesterday Movie">
-<div class="movie-info">
-<h3>Yesterday</h3>
-<p class="genre">Music</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>A musician becomes famous.</p>
-<span>1h 56m</span>
-</div>
-</div>
-
-<!-- 9 -->
-<div class="movie-card">
-<img src="movies/spiderman.jpg" alt="Spider-Man Movie">
-<div class="movie-info">
-<h3>Spider-Man</h3>
-<p class="genre">Action</p>
-<a href="booking.html" class="book-btn">Book Now</a>
-</div>
-<div class="movie-overlay">
-<p>Peter faces new threats.</p>
-<span>2h 9m</span>
-</div>
-</div>
-
-</div>
 
 </section>
 
 <footer class="main-footer">
 <p>© 2026 Lumière Cinema</p>
 </footer>
+
+<script src="movies.js"></script>
 
 </body>
 </html>

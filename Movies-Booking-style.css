@@ -121,6 +121,7 @@ nav a {
     border: 1px solid rgba(255,255,255,0.08);
     transition: 0.3s;
     position: relative;
+    cursor: pointer;
 }
 
 .movie-card img {
@@ -154,24 +155,80 @@ nav a {
 }
 
 .movie-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    opacity: 0;
-    transition: 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.95),
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0.3),
+    transparent
+  );
+
+  color: #fff;
+  padding: 15px;
+
+ 
+  height: 40%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  transform: translateY(100%);
+  transition: 0.3s ease;
+
+  pointer-events: none; 
+}
+
+.overlay-dark {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  
+  opacity: 0;
+  transition: 0.3s;
+}
+
+ .overlay-text {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;       
+  text-align: center;
+  color: #fff;
+
+  padding: 20px;
+
+  opacity: 0;
+  transition: 0.3s;
+
+  pointer-events: none; 
+}
+
+.movie-card:hover .overlay-dark {
+  opacity: 1;
+}
+
+.movie-card:hover .overlay-text {
+  opacity: 1;
 }
 
 .movie-card:hover {
-    transform: translateY(-4px);
+  transform: translateY(-8px) scale(1.02); 
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5); 
 }
 
-.movie-card:hover .movie-overlay {
-    opacity: 1;
+.overlay-dark,
+.overlay-text {
+  pointer-events: none;
 }
 
 /* Hero */
@@ -215,49 +272,119 @@ nav a {
 }
 
 /* Booking */
-.movie-details,
-.booking-section,
-.seats-section {
-    margin: 40px 60px;
+.movie-details{
+    max-width: 1200px;
+    margin: 40px auto;
+    margin-top: 60px;
     padding: 40px;
     border-radius: 14px;
+    grid-template-columns: 1fr 1.5fr;
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.06);
 }
 
+.booking-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "top top"
+    "left right";
+  gap: 40px;
+
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 40px;
+
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.booking-left {
+  grid-area: left;
+}
+
+.booking-right {
+  grid-area: right;
+   display: flex;
+  flex-direction: column;
+   align-items: flex-start;
+}
+
+.booking-form input,
+.booking-form select {
+  flex: 1;
+}
+
 .movie-content {
-    display: flex;
-    gap: 30px;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 40px;
+  align-items: center;
+
+  max-width: 1200px;
+  margin: 40px auto;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.movie-text {
+  max-width: 600px;
+}
+
+.movie-text h3 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.movie-text .genre {
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.movie-text p {
+  color: #ddd;
+  line-height: 1.6;
+  max-width: 600px;
 }
 
 .movie-content img {
-    width: 220px;
-    border-radius: 12px;
+  width: 100%;
+  border-radius: 16px;
 }
 
 .booking-form {
-    max-width: 400px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
 }
+
 
 .booking-form input,
 .booking-form select {
     padding: 12px;
     border-radius: 8px;
     border: none;
+    width: 100%;
 }
 
 /* seats */
 .seats {
-    display: grid;
-    grid-template-columns: repeat(10, 40px);
-    grid-auto-rows: 40px;
-    gap: 10px;
-    justify-content: center;
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(10, 45px);
+  gap: 12px;
+  justify-content: center;
 }
 
 .row {
@@ -274,6 +401,10 @@ nav a {
     border-radius: 8px;
     cursor: pointer;
     font-size: 12px;
+}
+.seats-title {
+  margin-bottom: 15px;
+  font-size: 20px;
 }
 
 .seats input {
@@ -300,13 +431,16 @@ nav a {
 }
 
 .confirm-btn {
-    margin-top: 25px;
-    padding: 12px 25px;
-    border-radius: 8px;
-    background: #730c1c;
-    color: white;
-    border: none;
-    cursor: pointer;
+  margin-top: 30px;
+  align-self: flex-start;
+  width: 250px;
+
+  padding: 12px 25px;
+  border-radius: 8px;
+  background: #730c1c;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .confirm-btn:hover {
@@ -323,4 +457,58 @@ nav a {
 /* smooth scroll */
 html {
     scroll-behavior: smooth;
+}
+
+.movies-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 50px;
+}
+
+.search-box {
+  width: 95%;
+  max-width: 1200px;
+  display: flex;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 40px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.search-box input {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+  color: #fff;
+}
+
+.search-box input::placeholder {
+  color: #ccc;
+}
+
+.search-box select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: rgba(255, 255, 255, 0.1); 
+  color: #fff;
+
+  padding: 12px 20px;
+  border: none;
+  outline: none;
+
+  border-left: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+
+  border-radius: 0 40px 40px 0; 
+}
+
+.search-box select option {
+  background: #fff;   
+  color: #333;        
 }

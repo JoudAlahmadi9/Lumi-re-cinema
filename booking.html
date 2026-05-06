@@ -30,53 +30,46 @@
   </header>
 
 <!-- MOVIE DETAILS -->
-<section class="movie-details">
+<div class="movie-content">
+  <img id="image">
 
-    <h2 class="section-heading">🎬 Movie Details</h2>
-
-    <div class="movie-content">
-        <img src="movies/spiderman.jpg" alt="Spider-Man">
-
-        <div class="movie-text">
-            <h3>Spider-Man</h3>
-            <p class="genre">Action | 2h 9m</p>
-            <p>Peter Parker faces new threats in his journey.</p>
-        </div>
-    </div>
-
-</section>
+  <div class="movie-text">
+    <h3 id="title"></h3>
+    <p class="genre" id="genre"></p>
+    <p id="desc"></p>
+  </div>
+</div>
 
 <!-- BOOKING FORM -->
-<section class="booking-section">
+<div class="booking-container">
 
-    <h2 class="section-heading">🧾 Booking Information</h2>
+  <!-- LEFT -->
+  <div class="booking-left">
+    <h2>Booking Information</h2>
+    <p>Choose your preferred date and time, then select your seats.</p>
 
-    <form class="booking-form">
+    <div class="booking-form">
+      <input type="date" required>
 
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email Address" required>
+      <select required>
+        <option value="">Select Time</option>
+        <option>12:00 PM</option>
+        <option>2:30 PM</option>
+        <option>5:00 PM</option>
+        <option>7:30 PM</option>
+        <option>10:00 PM</option>
+      </select>
+    </div>
+  </div>
 
-        <input type="date" required>
+  <!-- RIGHT -->
+  <div class="booking-right">
 
-        <select required>
-            <option value="">Select Time</option>
-            <option>3:00 PM</option>
-            <option>6:00 PM</option>
-            <option>9:00 PM</option>
-        </select>
+    <h3 class="seats-title">💺 Select Your Seats</h3>
 
-    </form>
-
-</section>
-
-<!-- SEATS -->
-<section class="seats-section">
-
-    <h2 class="section-heading">💺 Select Your Seats</h2>
-
-   <div class="seats">
-
-<div class="row">
+    <div class="seats">
+      
+    <div class="row">
 <input type="checkbox" id="A1"><label for="A1" class="seat">A1</label>
 <input type="checkbox" id="A2"><label for="A2" class="seat">A2</label>
 <input type="checkbox" id="A3"><label for="A3" class="seat">A3</label>
@@ -129,15 +122,17 @@
 </div>
 
 </div>
+
     <div class="price-box">
-        <p>Price per seat: <strong>25 SAR</strong></p>
-        <p class="note">* Total price depends on selected seats</p>
+      <p>Price per seat: <strong>25 SAR</strong></p>
+      <p id="totalPrice">Total: 0 SAR</p>
     </div>
 
-    <!-- CONFIRM -->
     <button class="confirm-btn">Confirm Booking</button>
 
-</section>
+  </div>
+
+</div>
 
 <footer class="main-footer">
 <p>© 2026 Lumière Cinema</p>
@@ -146,7 +141,7 @@
   const confirmBtn = document.querySelector(".confirm-btn");
 
   confirmBtn.addEventListener("click", async function () {
-    const userEmail = localStorage.getItem("userEmail");
+    const userEmail = localStorage.getItem("userEmail") || "guest";
 
     if (!userEmail) {
       alert("You must login first");
@@ -154,19 +149,18 @@
       return;
     }
 
-    const fullName = document.querySelector(".booking-form input[type='text']").value;
-    const bookingEmail = document.querySelector(".booking-form input[type='email']").value;
+
     const date = document.querySelector(".booking-form input[type='date']").value;
-    const time = document.querySelector(".booking-form select").value;
+const time = document.querySelector(".booking-form select").value;
 
-    const selectedSeats = Array.from(
-      document.querySelectorAll(".seats input[type='checkbox']:checked")
-    ).map(seat => seat.id);
+const selectedSeats = Array.from(
+  document.querySelectorAll(".seats input[type='checkbox']:checked")
+).map(seat => seat.id);
 
-    if (!fullName || !bookingEmail || !date || !time || selectedSeats.length === 0) {
-      alert("Please fill all booking information and select at least one seat");
-      return;
-    }
+if (!date || !time || selectedSeats.length === 0) {
+  alert("Please select date, time, and seats");
+  return;
+}
 
     const res = await fetch("http://localhost:3000/book", {
       method: "POST",
@@ -175,9 +169,7 @@
       },
       body: JSON.stringify({
         userEmail,
-        fullName,
-        bookingEmail,
-        movie: "Spider-Man",
+        movie: document.getElementById("title").textContent,
         date,
         time,
         seats: selectedSeats.join(", "),
@@ -188,11 +180,94 @@
     const data = await res.json();
 
     if (data.success) {
-      alert("Booking confirmed successfully 🎟️");
-    } else {
-      alert("Booking failed");
-    }
+  alert("Booking confirmed successfully 🎟️");
+
+  window.location.href = "index.html";
+
+} else {
+  alert("Booking failed ❌");
+}
   });
 </script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const movieId = params.get("id");
+
+fetch(`https://api.tvmaze.com/shows/${movieId}`)
+  .then(res => res.json())
+  .then(movie => {
+
+    document.getElementById("title").textContent = movie.name;
+
+    document.getElementById("image").src = movie.image?.medium;
+
+    document.getElementById("desc").textContent =
+      movie.summary
+        ? movie.summary.replace(/<[^>]+>/g, "")
+        : "No description";
+    
+    document.getElementById("genre").textContent =
+      movie.genres.join(", ") + " | " +
+      (movie.runtime ? movie.runtime + " min" : "N/A");
+
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const dateInput = document.querySelector("input[type='date']");
+  const timeSelect = document.querySelector("select");
+  const seats = document.querySelector(".seats");
+
+  if (!dateInput || !timeSelect || !seats) {
+    console.log("❌ elements not found");
+    return;
+  }
+
+  function enableSeats() {
+    console.log("✅ triggered");
+
+    if (dateInput.value && timeSelect.value) {
+      seats.style.pointerEvents = "auto";
+      seats.style.opacity = "1";
+    }
+  }
+
+  function resetSeats() {
+    document.querySelectorAll(".seats input:checked")
+      .forEach(seat => seat.checked = false);
+  }
+
+  dateInput.addEventListener("change", () => {
+    resetSeats();
+    enableSeats();
+  });
+
+  timeSelect.addEventListener("change", () => {
+    resetSeats();
+    enableSeats();
+  });
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const seats = document.querySelectorAll(".seats input");
+  const totalPrice = document.getElementById("totalPrice");
+
+  seats.forEach(seat => {
+    seat.addEventListener("change", () => {
+
+      const selectedSeats = document.querySelectorAll(".seats input:checked").length;
+
+      totalPrice.textContent = "Total: " + (selectedSeats * 25) + " SAR";
+
+    });
+  });
+
+});
+</script>
+<script src="booking.js"></script>
 </body>
 </html>
