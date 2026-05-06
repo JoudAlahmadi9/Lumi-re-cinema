@@ -37,7 +37,7 @@ app.post("/signup", (req, res) => {
 
   const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 
-  db.query(sql, [name, email, password], (err, result) => {
+  db.query(sql, [name, email, password], (err) => {
     if (err) {
       return res.json({
         success: false,
@@ -87,35 +87,76 @@ app.post("/login", (req, res) => {
     }
   });
 });
-db.query(`
-CREATE TABLE IF NOT EXISTS bookings (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  userEmail VARCHAR(100),
-  fullName VARCHAR(100),
-  bookingEmail VARCHAR(100),
-  movie VARCHAR(100),
-  date VARCHAR(50),
-  time VARCHAR(50),
-  seats VARCHAR(255),
-  totalPrice INT
-)
-`);
 
+// BOOKING
 app.post("/book", (req, res) => {
-  const { userEmail, fullName, bookingEmail, movie, date, time, seats, totalPrice } = req.body;
+  const {
+    userEmail,
+    fullName,
+    bookingEmail,
+    movie,
+    date,
+    time,
+    seats,
+    totalPrice
+  } = req.body;
 
   const sql = `
-    INSERT INTO bookings 
+    INSERT INTO bookings
     (userEmail, fullName, bookingEmail, movie, date, time, seats, totalPrice)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  db.query(sql, [userEmail, fullName, bookingEmail, movie, date, time, seats, totalPrice], (err) => {
+  db.query(
+    sql,
+    [userEmail, fullName, bookingEmail, movie, date, time, seats, totalPrice],
+    (err) => {
+      if (err) {
+        return res.json({
+          success: false,
+          message: "Booking failed"
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Booking saved successfully"
+      });
+    }
+  );
+});
+// CONTACT - Updated to support Guest Messages
+app.post("/contact", (req, res) => {
+  const { firstName, lastName, email, dob, opinion, userId } = req.body;
+
+  // التحقق من الحقول الإلزامية فقط
+  if (!firstName || !lastName || !email || !opinion) {
+    return res.json({
+      success: false,
+      message: "Please fill all required fields"
+    });
+  }
+
+  const sql = `
+    INSERT INTO contact_messages 
+    (user_id, first_name, last_name, email, dob, opinion) 
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+
+  // استخدام userId || null للسماح بالإرسال بدون تسجيل دخول
+  db.query(sql, [userId || null, firstName, lastName, email, dob, opinion], (err) => {
     if (err) {
-      return res.json({ success: false });
+      console.error("Database Error:", err);
+      return res.json({
+        success: false,
+        message: "Message not saved"
+      });
     }
 
-    res.json({ success: true });
+    res.json({
+      success: true,
+      message: "Message sent successfully!"
+    });
   });
 });
 app.listen(PORT, () => {
