@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumière Cinema | Contact Us</title> 
+    <title>Lumière Cinema | Contact Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style-contact-us.css">
@@ -29,9 +30,10 @@
             <div class="top-content">
                 <span class="badge">Contact Us</span>
                 <h2>We’d Love to Hear From You</h2>
-                <p>Whether you have a question about upcoming screenings or want to book a private event, our team is ready to help.</p>
+                <p>Whether you have a question about upcoming screenings or want to book a private event, our team is
+                    ready to help.</p>
             </div>
-            
+
             <div class="contact-footer">
                 <div class="footer-item">
                     <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
@@ -49,44 +51,51 @@
                 </div>
             </div>
         </div>
-
         <div class="form-card">
-            <form>
-                <div class="row">
-                    <div class="input-group">
-                        <label>First Name</label>
-                        <input type="text" placeholder="e.g. Lana" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Last Name</label>
-                        <input type="text" placeholder="e.g. Alsubhi" required>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="Lana.als@example.com" required>
-                </div>
-
-                <div class="input-group">
-                    <label>Date of Birth</label>
-                    <input type="date" required>
-                </div>
-
-                <div class="input-group">
-                    <label>Write your opinion</label>
-                    <textarea placeholder="Share your thoughts with us..." required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    Send Message <i class="fas fa-paper-plane"></i>
-                </button>
-                <p class="privacy-terms">
-                    By submitting, you agree to our privacy terms.
-                </p>
-            </form>
+    <form id="contactForm" novalidate>
+        <div class="row">
+            <div class="input-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="e.g. Lana" required>
+            </div>
+            <div class="input-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="e.g. Alsubhi" required>
+            </div>
         </div>
-    </div>
 
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Lana.als@example.com" required>
+        </div>
+
+        <div class="input-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <div class="input-group">
+            <label for="opinion">Write your opinion</label>
+            <textarea id="opinion" name="opinion" placeholder="Share your thoughts with us..." minlength="10" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Send Message <i class="fas fa-paper-plane"></i>
+        </button>
+        <p class="privacy-terms">
+            By submitting, you agree to our privacy terms.
+        </p>
+    </form>
+</div>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div id="modalIcon"><i class="fas fa-exclamation-circle"></i></div>
+                <p id="modalMessage">Welcome to Lumière! Please ensure all fields are filled before sending.</p>
+            </div>
+        </div>
+        <script src="lumiere-contact.js"></script>
 </body>
+
 </html>
